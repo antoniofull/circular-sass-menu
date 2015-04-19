@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <!--[if IEMobile 7 ]><html class="no-js iem7" manifest="default.appcache?v=1"><![endif]--> 
+<!--[if lt IE 7 ]><html class="no-js ie6" lang="en"><![endif]--> 
+<!--[if IE 7 ]><html class="no-js ie7" lang="en"><![endif]--> 
+<!--[if IE 8 ]><html class="no-js ie8" lang="en"><![endif]--> 
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Mongo,NodeJs, ES6, Browserify, Gulp">
+	<link rel="shortcut icon" href="/img/favicon.ico"/>
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="build/css/main.css">
+</head>
+<body class="">
+<div id="page" class="page">
+<div id="overlay"></div>
+	<div class="presentation">
+		<h2>Presentation</h2>
+		<p>
+			This is a menu like the on in the social app Path and UP24 app, the fitness tracker.
+		</p>
+	</div>
+	<nav class="main-navigation">
+		
+		<div class="menu">
+		<span class="btn"></span>
+			<ul class="initialize">
+				<li class="menu-icon about">
+					<a class="icon" href="#">
+						<span></span>
+					</a>
+				</li>
+				<li class="menu-icon journal">
+					<a class="icon"  href="#">
+						<span></span>
+					</a>
+				</li>
+				<li class="menu-icon lab">
+					<a class="icon"  href="#">
+						<span></span>
+					</a>
+				</li>
+				<li class="menu-icon contact">	
+					<a class="icon"  href="#">
+						<span></span>
+					</a>
+				</li>
+				<li class="menu-icon source">
+					<a class="icon"  href="#">
+						<span></span>
+					</a>
+				</li>
+			</ul>
+		</div>		
+	</nav>
+
+</div>
+<footer role="contentinfo">
+</footer>
+<script src="build/js/main.js"></script> 
+<script>
+	window.addEventListener('DOMContentLoaded', function(){
+		var btn = document.querySelector('.btn');
+		var list = document.querySelector('.menu ul');
+		var overlay = document.querySelector("#overlay");
+
+		btn.addEventListener('click', function(e){
+			e.preventDefault();
+			this.classList.toggle('open');
+			list.classList.remove('initialize');
+			list.classList.toggle('show');
+			overlay.classList.toggle('show');
+		});
+	});
+</script>
+</body>
+</html>

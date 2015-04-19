@@ -1,0 +1,237 @@
+@import "partials/variables";
+
+%circle {
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	background: red;
+	position: absolute;
+}
+%center{
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+body{
+	font-size: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.presentation {
+	flex: 1;
+}
+
+.main-navigation {
+	width: 500px;
+	height:500px;
+	background: #fff;
+	position: relative;
+}
+.btn {
+	@extend %circle;
+	bottom: 15px;
+	left: calc(50% - 65px);
+	border: 5px solid #fff;
+	cursor: pointer;
+	height: 40px;
+	width: 40px;
+	display: block;
+	z-index: 4;
+	transition: all 0.1s ease-out;
+	&.open {
+		transform: rotate(-140deg);
+	}
+	&:after {
+		@extend %center;
+		height: 100%;
+		content: "+";
+		position: absolute;
+		color: #fff;
+		font-size: 36px;
+		line-height: 36px;
+	}
+}
+
+.menu {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 3;
+	ul {
+		position: absolute;
+		bottom: 20px;
+		left: calc(50% - 60px);
+		height: 100%;
+		width: 50px;
+	}
+}
+.menu-icon{
+	height: 100px;		
+	position: absolute;
+	bottom: 0;
+	transform-origin: 20px 80px;
+	margin: auto;
+	&.about {
+		span:after {
+			content: "\270D";
+		}
+	}
+	&.journal{
+		span:after {
+		content: "\2764";
+		}
+	}
+	&.lab{
+		span:after {
+		content: "\2766";
+		}
+	}
+	&.contact{
+		span:after {
+		content: "\2709";
+		}
+	}
+	&.source{
+		span:after {
+		content: "\2743";
+		}
+	}
+}
+
+// icons 
+.icon {
+	@extend %circle;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	border: 1px solid #ccc;
+	background: rgba(#fff, .7);
+	bottom: 0;
+	color: #fff;
+	animation: bounceOut .7s ease backwards;
+	&:after {
+		@extend %circle;
+		width: 80%;
+		height: 80%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		position: absolute;
+		content: "";
+		background: rgba(#222, .9);
+		z-index: 1;
+	}
+	&:visited,
+	&:active {
+		color: #fff;
+	}
+	span {
+		display: block;
+		height: 100%;
+		width:100%;
+		line-height: 30px;
+		position: relative;
+		animation: rotateOut .32s ease forwards;
+		z-index: 2;
+		&:after {
+			font-size: 14px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+.menu ul.show {
+	.icon {
+		animation: bounceIn .4s ease forwards;
+		span {
+			animation: rotateIn 1s ease forwards;
+		}
+	}
+}
+
+#overlay{
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	background: rgba(#222, 0.4);
+	&.show {
+		// display: block;		
+	}
+}
+.initialize {
+	li {
+		opacity: 0;
+	}
+}
+
+@for $i from 0 through 5 {
+	$value: 0;
+	$reversed: 5 - $i;
+	@if ($i > 0) {
+		$value: 0.04 * $i;	
+		.show .menu-icon:nth-of-type(#{$i}) .icon {
+			animation-delay: #{$value}s; 
+		}	
+		.show .menu-icon:nth-of-type(#{$i}) span {
+			animation-delay: #{$value}s; 
+		}
+	} @else {
+		.show .menu-icon:nth-of-type(#{$i}) .icon {
+			animation-delay: 0; 	
+		}
+		.show .menu-icon:nth-of-type(#{$i}) .icon span {
+			animation-delay: 0; 	
+		}
+	}
+	
+	@if ($reversed > 0) {
+		.menu-icon:nth-of-type(#{$reversed}) .icon {
+			animation-delay: #{$value}s; 	
+		}				
+	} @else {
+		.menu-icon:nth-of-type(5) .icon {
+			animation-delay: 0s; 	
+		}
+	}
+		
+}
+.about {transform: rotate(-70deg);}
+.journal {transform: rotate(-35deg);}
+.lab {transform: rotate(0deg);}
+.contact {transform: rotate(35deg);}
+.source {transform: rotate(70deg);}
+// Animations 
+@keyframes bounceIn {
+	0% {bottom: 0;}
+	50% {bottom: 105%;}
+	70% {bottom: 97%; }
+	100% {bottom: 100%;}
+}
+
+@keyframes bounceOut {
+	 0%   { bottom: 100%; }
+    40%  { bottom: 125%; }
+    100% { bottom: 0; }
+}
+@keyframes rotateIn {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+@keyframes rotateOut {
+	100% {transform: rotate(-720deg);}
+}
