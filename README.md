@@ -4,4 +4,4 @@ Inspired by Path and Up24 Apps (and by the fact that I am learning swift) I crea
 
 Check out the example : 
 
-[Circular Menu](http://www.antoniofullone.com/circular-menu/)
+[Circular Menu](http://antoniofullone.com/files/circular/)
